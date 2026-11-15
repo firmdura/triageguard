@@ -1,7 +1,6 @@
 # TriageGuard
 
 [![Latest release](https://img.shields.io/github/v/release/firmdura/triageguard)](https://github.com/firmdura/triageguard/releases/latest)
-[![CI: not configured](https://img.shields.io/badge/CI-not%20configured-lightgrey)](https://github.com/firmdura/triageguard/actions)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 [![pkg.go.dev](https://pkg.go.dev/badge/github.com/firmdura/triageguard/pkg/triageguard.svg)](https://pkg.go.dev/github.com/firmdura/triageguard/pkg/triageguard)
 
