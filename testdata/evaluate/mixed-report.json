@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "status": "unverifiable",
+  "reason": "evidence-unavailable",
+  "summary": {
+    "decisions": {"unchanged": 0, "review_required": 1, "unverifiable": 1},
+    "assumptions": {"unchanged": 1, "review_required": 2, "unverifiable": 1}
+  },
+  "decisions": [
+    {
+      "id": "a-mixed",
+      "cve": "CVE-2024-0001",
+      "baseline": "release-1",
+      "rationale": "Synthetic feature decision.",
+      "status": "unverifiable",
+      "reason": "evidence-unavailable",
+      "assumptions": [
+        {
+          "id": "a-value",
+          "kind": "config",
+          "path": "config.json",
+          "key": "FEATURE_X",
+          "expected": {"present": true, "value": "n"},
+          "observed": {"state": "present", "value": "y"},
+          "status": "review-required",
+          "reason": "value-changed"
+        },
+        {
+          "id": "b-same",
+          "kind": "config",
+          "path": "config.json",
+          "key": "OLD",
+          "expected": {"present": false},
+          "observed": {"state": "absent"},
+          "status": "unchanged",
+          "reason": "match"
+        },
+        {
+          "id": "c-unavailable",
+          "kind": "file",
+          "path": "source.c",
+          "expected": {"present": true, "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+          "observed": {"state": "unavailable", "reason": "evidence-missing"},
+          "status": "unverifiable",
+          "reason": "evidence-missing"
+        }
+      ]
+    },
+    {
+      "id": "z-drift",
+      "cve": "CVE-2024-0002",
+      "baseline": "release-2",
+      "rationale": "Synthetic inventory review.",
+      "status": "review-required",
+      "reason": "assumptions-changed",
+      "assumptions": [
+        {
+          "id": "z-patch-missing",
+          "kind": "patch",
+          "path": "patches.json",
+          "key": "fix",
+          "expected": {"present": true, "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+          "observed": {"state": "absent"},
+          "status": "review-required",
+          "reason": "key-missing"
+        }
+      ]
+    }
+  ]
+}

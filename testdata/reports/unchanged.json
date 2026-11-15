@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "status": "unchanged",
+  "reason": "all-unchanged",
+  "summary": {
+    "decisions": {
+      "unchanged": 1,
+      "review_required": 0,
+      "unverifiable": 0
+    },
+    "assumptions": {
+      "unchanged": 3,
+      "review_required": 0,
+      "unverifiable": 0
+    }
+  },
+  "decisions": [
+    {
+      "id": "baseline-retained",
+      "cve": "CVE-2024-0001",
+      "baseline": "release-1",
+      "rationale": "Synthetic retained assumptions.",
+      "status": "unchanged",
+      "reason": "all-unchanged",
+      "assumptions": [
+        {
+          "id": "absent-inventory-key",
+          "kind": "patch",
+          "path": "patches.json",
+          "key": "unused-patch",
+          "expected": {
+            "present": false
+          },
+          "observed": {
+            "state": "absent"
+          },
+          "status": "unchanged",
+          "reason": "match"
+        },
+        {
+          "id": "empty-config",
+          "kind": "config",
+          "path": "config.json",
+          "key": "",
+          "expected": {
+            "present": true,
+            "value": ""
+          },
+          "observed": {
+            "state": "present",
+            "value": ""
+          },
+          "status": "unchanged",
+          "reason": "match"
+        },
+        {
+          "id": "source-retained",
+          "kind": "file",
+          "path": "src/parser.c",
+          "expected": {
+            "present": true,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "observed": {
+            "state": "present",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "status": "unchanged",
+          "reason": "match"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "status": "review-required",
+  "reason": "assumptions-changed",
+  "summary": {
+    "decisions": {
+      "unchanged": 0,
+      "review_required": 1,
+      "unverifiable": 0
+    },
+    "assumptions": {
+      "unchanged": 0,
+      "review_required": 2,
+      "unverifiable": 0
+    }
+  },
+  "decisions": [
+    {
+      "id": "feature-drift",
+      "cve": "CVE-2024-0002",
+      "baseline": "release-2",
+      "rationale": "Feature switched on.\nReassess the human decision; café 日本語.",
+      "status": "review-required",
+      "reason": "assumptions-changed",
+      "assumptions": [
+        {
+          "id": "feature-drift",
+          "kind": "config",
+          "path": "config.json",
+          "key": "FEATURE_X",
+          "expected": {
+            "present": true,
+            "value": "n"
+          },
+          "observed": {
+            "state": "present",
+            "value": "y"
+          },
+          "status": "review-required",
+          "reason": "value-changed"
+        },
+        {
+          "id": "patch-drift",
+          "kind": "patch",
+          "path": "patches.json",
+          "key": "fix-1",
+          "expected": {
+            "present": true,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "observed": {
+            "state": "present",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          "status": "review-required",
+          "reason": "hash-changed"
+        }
+      ]
+    }
+  ]
+}

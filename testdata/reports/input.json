@@ -1,0 +1,352 @@
+{
+  "unchanged": {
+    "schema_version": 1,
+    "status": "unchanged",
+    "reason": "all-unchanged",
+    "summary": {
+      "decisions": {
+        "unchanged": 1,
+        "review_required": 0,
+        "unverifiable": 0
+      },
+      "assumptions": {
+        "unchanged": 3,
+        "review_required": 0,
+        "unverifiable": 0
+      }
+    },
+    "decisions": [
+      {
+        "id": "baseline-retained",
+        "cve": "CVE-2024-0001",
+        "baseline": "release-1",
+        "rationale": "Synthetic retained assumptions.",
+        "status": "unchanged",
+        "reason": "all-unchanged",
+        "assumptions": [
+          {
+            "id": "source-retained",
+            "kind": "file",
+            "path": "src/parser.c",
+            "expected": {
+              "present": true,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "observed": {
+              "state": "present",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "status": "unchanged",
+            "reason": "match"
+          },
+          {
+            "id": "empty-config",
+            "kind": "config",
+            "path": "config.json",
+            "key": "",
+            "expected": {
+              "present": true,
+              "value": ""
+            },
+            "observed": {
+              "state": "present",
+              "value": ""
+            },
+            "status": "unchanged",
+            "reason": "match"
+          },
+          {
+            "id": "absent-inventory-key",
+            "kind": "patch",
+            "path": "patches.json",
+            "key": "unused-patch",
+            "expected": {
+              "present": false
+            },
+            "observed": {
+              "state": "absent"
+            },
+            "status": "unchanged",
+            "reason": "match"
+          }
+        ]
+      }
+    ]
+  },
+  "review-required": {
+    "schema_version": 1,
+    "status": "review-required",
+    "reason": "assumptions-changed",
+    "summary": {
+      "decisions": {
+        "unchanged": 0,
+        "review_required": 1,
+        "unverifiable": 0
+      },
+      "assumptions": {
+        "unchanged": 0,
+        "review_required": 2,
+        "unverifiable": 0
+      }
+    },
+    "decisions": [
+      {
+        "id": "feature-drift",
+        "cve": "CVE-2024-0002",
+        "baseline": "release-2",
+        "rationale": "Feature switched on.\nReassess the human decision; café 日本語.",
+        "status": "review-required",
+        "reason": "assumptions-changed",
+        "assumptions": [
+          {
+            "id": "patch-drift",
+            "kind": "patch",
+            "path": "patches.json",
+            "key": "fix-1",
+            "expected": {
+              "present": true,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "observed": {
+              "state": "present",
+              "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+            },
+            "status": "review-required",
+            "reason": "hash-changed"
+          },
+          {
+            "id": "feature-drift",
+            "kind": "config",
+            "path": "config.json",
+            "key": "FEATURE_X",
+            "expected": {
+              "present": true,
+              "value": "n"
+            },
+            "observed": {
+              "state": "present",
+              "value": "y"
+            },
+            "status": "review-required",
+            "reason": "value-changed"
+          }
+        ]
+      }
+    ]
+  },
+  "unverifiable": {
+    "schema_version": 1,
+    "status": "unverifiable",
+    "reason": "evidence-unavailable",
+    "summary": {
+      "decisions": {
+        "unchanged": 0,
+        "review_required": 0,
+        "unverifiable": 1
+      },
+      "assumptions": {
+        "unchanged": 0,
+        "review_required": 1,
+        "unverifiable": 1
+      }
+    },
+    "decisions": [
+      {
+        "id": "missing-evidence",
+        "cve": "CVE-2024-0003",
+        "baseline": "release-3",
+        "rationale": "The source evidence is unavailable.",
+        "status": "unverifiable",
+        "reason": "evidence-unavailable",
+        "assumptions": [
+          {
+            "id": "missing-file",
+            "kind": "file",
+            "path": "src/missing.c",
+            "expected": {
+              "present": true,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "observed": {
+              "state": "unavailable",
+              "reason": "evidence-missing"
+            },
+            "status": "unverifiable",
+            "reason": "evidence-missing"
+          },
+          {
+            "id": "missing-inventory-key",
+            "kind": "patch",
+            "path": "patches.json",
+            "key": "fix-missing",
+            "expected": {
+              "present": true,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "observed": {
+              "state": "absent"
+            },
+            "status": "review-required",
+            "reason": "key-missing"
+          }
+        ]
+      }
+    ]
+  },
+  "mixed": {
+    "schema_version": 1,
+    "status": "unverifiable",
+    "reason": "evidence-unavailable",
+    "summary": {
+      "decisions": {
+        "unchanged": 1,
+        "review_required": 1,
+        "unverifiable": 1
+      },
+      "assumptions": {
+        "unchanged": 3,
+        "review_required": 3,
+        "unverifiable": 1
+      }
+    },
+    "decisions": [
+      {
+        "id": "missing-evidence",
+        "cve": "CVE-2024-0003",
+        "baseline": "release-3",
+        "rationale": "The source evidence is unavailable.",
+        "status": "unverifiable",
+        "reason": "evidence-unavailable",
+        "assumptions": [
+          {
+            "id": "missing-file",
+            "kind": "file",
+            "path": "src/missing.c",
+            "expected": {
+              "present": true,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "observed": {
+              "state": "unavailable",
+              "reason": "evidence-missing"
+            },
+            "status": "unverifiable",
+            "reason": "evidence-missing"
+          },
+          {
+            "id": "missing-inventory-key",
+            "kind": "patch",
+            "path": "patches.json",
+            "key": "fix-missing",
+            "expected": {
+              "present": true,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "observed": {
+              "state": "absent"
+            },
+            "status": "review-required",
+            "reason": "key-missing"
+          }
+        ]
+      },
+      {
+        "id": "baseline-retained",
+        "cve": "CVE-2024-0001",
+        "baseline": "release-1",
+        "rationale": "Synthetic retained assumptions.",
+        "status": "unchanged",
+        "reason": "all-unchanged",
+        "assumptions": [
+          {
+            "id": "source-retained",
+            "kind": "file",
+            "path": "src/parser.c",
+            "expected": {
+              "present": true,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "observed": {
+              "state": "present",
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "status": "unchanged",
+            "reason": "match"
+          },
+          {
+            "id": "empty-config",
+            "kind": "config",
+            "path": "config.json",
+            "key": "",
+            "expected": {
+              "present": true,
+              "value": ""
+            },
+            "observed": {
+              "state": "present",
+              "value": ""
+            },
+            "status": "unchanged",
+            "reason": "match"
+          },
+          {
+            "id": "absent-inventory-key",
+            "kind": "patch",
+            "path": "patches.json",
+            "key": "unused-patch",
+            "expected": {
+              "present": false
+            },
+            "observed": {
+              "state": "absent"
+            },
+            "status": "unchanged",
+            "reason": "match"
+          }
+        ]
+      },
+      {
+        "id": "feature-drift",
+        "cve": "CVE-2024-0002",
+        "baseline": "release-2",
+        "rationale": "Feature switched on.\nReassess the human decision; café 日本語.",
+        "status": "review-required",
+        "reason": "assumptions-changed",
+        "assumptions": [
+          {
+            "id": "patch-drift",
+            "kind": "patch",
+            "path": "patches.json",
+            "key": "fix-1",
+            "expected": {
+              "present": true,
+              "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "observed": {
+              "state": "present",
+              "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+            },
+            "status": "review-required",
+            "reason": "hash-changed"
+          },
+          {
+            "id": "feature-drift",
+            "kind": "config",
+            "path": "config.json",
+            "key": "FEATURE_X",
+            "expected": {
+              "present": true,
+              "value": "n"
+            },
+            "observed": {
+              "state": "present",
+              "value": "y"
+            },
+            "status": "review-required",
+            "reason": "value-changed"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "status": "unverifiable",
+  "reason": "evidence-unavailable",
+  "summary": {
+    "decisions": {
+      "unchanged": 0,
+      "review_required": 0,
+      "unverifiable": 1
+    },
+    "assumptions": {
+      "unchanged": 0,
+      "review_required": 1,
+      "unverifiable": 1
+    }
+  },
+  "decisions": [
+    {
+      "id": "missing-evidence",
+      "cve": "CVE-2024-0003",
+      "baseline": "release-3",
+      "rationale": "The source evidence is unavailable.",
+      "status": "unverifiable",
+      "reason": "evidence-unavailable",
+      "assumptions": [
+        {
+          "id": "missing-file",
+          "kind": "file",
+          "path": "src/missing.c",
+          "expected": {
+            "present": true,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "observed": {
+            "state": "unavailable",
+            "reason": "evidence-missing"
+          },
+          "status": "unverifiable",
+          "reason": "evidence-missing"
+        },
+        {
+          "id": "missing-inventory-key",
+          "kind": "patch",
+          "path": "patches.json",
+          "key": "fix-missing",
+          "expected": {
+            "present": true,
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          },
+          "observed": {
+            "state": "absent"
+          },
+          "status": "review-required",
+          "reason": "key-missing"
+        }
+      ]
+    }
+  ]
+}

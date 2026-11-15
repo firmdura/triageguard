@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "status": "review-required",
+  "reason": "assumptions-changed",
+  "summary": {
+    "decisions": {
+      "unchanged": 0,
+      "review_required": 1,
+      "unverifiable": 0
+    },
+    "assumptions": {
+      "unchanged": 2,
+      "review_required": 1,
+      "unverifiable": 0
+    }
+  },
+  "decisions": [
+    {
+      "id": "synthetic-parser-decision",
+      "cve": "CVE-2024-0001",
+      "baseline": "synthetic-release-1",
+      "rationale": "Synthetic historical review assumed FEATURE_X was disabled and the declared source and patch inventory were retained.",
+      "status": "review-required",
+      "reason": "assumptions-changed",
+      "assumptions": [
+        {
+          "id": "feature-disabled",
+          "kind": "config",
+          "path": "build-config.json",
+          "key": "FEATURE_X",
+          "expected": {
+            "present": true,
+            "value": "n"
+          },
+          "observed": {
+            "state": "present",
+            "value": "y"
+          },
+          "status": "review-required",
+          "reason": "value-changed"
+        },
+        {
+          "id": "patch-record-retained",
+          "kind": "patch",
+          "path": "patches.json",
+          "key": "synthetic-feature-default",
+          "expected": {
+            "present": true,
+            "sha256": "696037f8802b168baee59e97178a84782a5f0552b5410126c5e4b3bbf530a4d8"
+          },
+          "observed": {
+            "state": "present",
+            "sha256": "696037f8802b168baee59e97178a84782a5f0552b5410126c5e4b3bbf530a4d8"
+          },
+          "status": "unchanged",
+          "reason": "match"
+        },
+        {
+          "id": "source-retained",
+          "kind": "file",
+          "path": "src/parser.c",
+          "expected": {
+            "present": true,
+            "sha256": "4f27c07bbe11b7e593bb3b9290ddf9a697a1771cf331aedad0ad10b70fcc9166"
+          },
+          "observed": {
+            "state": "present",
+            "sha256": "4f27c07bbe11b7e593bb3b9290ddf9a697a1771cf331aedad0ad10b70fcc9166"
+          },
+          "status": "unchanged",
+          "reason": "match"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+schema_version: 1
+decisions:
+  - id: example
+    cve: CVE-2024-0001
+    baseline: release-1
+    rationale: Synthetic decision; no applicability claim.
+    assumptions:
+      - id: config-present
+        kind: config
+        path: config.json
+        key: FEATURE_X
+        expected_value: 'n'

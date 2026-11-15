@@ -1,0 +1,39 @@
+schema_version: 1
+decisions:
+  - id: synthetic-decision
+    cve: CVE-2024-0001
+    baseline: synthetic-1
+    rationale: Synthetic historical decision; no affected-product claim.
+    assumptions:
+      - id: feature-disabled
+        kind: config
+        path: config.json
+        key: FEATURE_X
+        expected_present: true
+        expected_value: 'n'
+      - id: empty-value
+        kind: config
+        path: config.json
+        key: EMPTY
+        expected_present: true
+        expected_value: ''
+      - id: absent-config
+        kind: config
+        path: config.json
+        key: NOT_EXPORTED
+        expected_present: false
+      - id: source-retained
+        kind: file
+        path: source.c
+        expected_sha256: 8e59cbd3e1cd21983e65a8f736ecee23a64e54b8cba27afce8c72446eca761d2
+      - id: patch-inventory
+        kind: patch
+        path: patches.json
+        key: synthetic-patch
+        expected_present: true
+        expected_sha256: 7b196a36f8e202542e139be15a2934b359770b2e02cb6d85debadaf906957e1d
+      - id: absent-patch
+        kind: patch
+        path: patches.json
+        key: not-in-inventory
+        expected_present: false

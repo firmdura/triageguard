@@ -1,0 +1,8 @@
+--- a/src/parser.c
++++ b/src/parser.c
+@@ -1,4 +1,4 @@
+ /* Original synthetic TriageGuard fixture; not production firmware. */
+ int parser_feature_enabled(void) {
+-    return 1;
++    return 0;
+ }

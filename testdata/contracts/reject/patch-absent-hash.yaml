@@ -1,0 +1,13 @@
+schema_version: 1
+decisions:
+  - id: example
+    cve: CVE-2024-0001
+    baseline: release-1
+    rationale: Synthetic decision; no applicability claim.
+    assumptions:
+      - id: patch
+        kind: patch
+        path: patches.json
+        key: fix
+        expected_present: false
+        expected_sha256: '0000000000000000000000000000000000000000000000000000000000000000'
