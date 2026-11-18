@@ -125,7 +125,7 @@ func Run(ctx context.Context, args []string, stdout, stderr io.Writer, version s
 	manifest, loadErr := ops.LoadManifest(contextReader{ctx, manifestFile})
 	closeErr := manifestFile.Close()
 	if loadErr != nil {
-		return fail(loadErr)
+		return fail(fmt.Errorf("load manifest %q: %w", options.manifest, loadErr))
 	}
 	if closeErr != nil {
 		return fail(fmt.Errorf("close manifest: %w", closeErr))

@@ -260,6 +260,8 @@ func TestCLI(t *testing.T) {
 				t.Fatalf("expected diagnostic-only exit2: %v %+v", args, got)
 			}
 		}
+		manifest = filepath.Join(filepath.Dir(manifest), `invalid "manifest".yaml`)
+		valid[2] = manifest
 		for _, data := range []string{"schema_version: 1\ndecisions: []\n", "schema_version: [", "schema_version: 1\nschema_version: 1\n"} {
 			if err := os.WriteFile(manifest, []byte(data), 0640); err != nil {
 				t.Fatal(err)
@@ -267,6 +269,9 @@ func TestCLI(t *testing.T) {
 			got := runBinary(t, binary, valid...)
 			if got.code != 2 || len(got.stdout) != 0 || len(got.stderr) == 0 {
 				t.Fatalf("invalid manifest produced report: %+v", got)
+			}
+			if !strings.Contains(string(got.stderr), fmt.Sprintf("manifest %q:", manifest)) {
+				t.Fatalf("manifest diagnostic does not identify its source: %s", got.stderr)
 			}
 		}
 	})

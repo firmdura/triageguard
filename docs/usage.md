@@ -73,6 +73,7 @@ evidence paths beneath it.
 | 2 | At least one assumption is `unverifiable`, or invalid input, a setup or I/O failure, or cancellation prevented a successful run |
 
 The report goes to standard output. Diagnostic messages go to standard error.
+Manifest-loading errors include the quoted manifest path and the underlying cause.
 An invalid manifest, failure to set up the evidence root, or cancellation
 produces no report. If an individual evidence file is unavailable, the CLI
 produces a complete report with exit code 2 and no diagnostic message. A failed
