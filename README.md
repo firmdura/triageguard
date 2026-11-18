@@ -149,6 +149,15 @@ not publish a release or change repository visibility.
 - [Distribution and reproducible builds](docs/distribution.md)
 - [Design and scope](docs/design.md)
 
+## About Firmdura
+
+This repository contains a standalone verification utility from
+[Firmdura](https://firmdura.com). Firmdura's commercial offer is shared embedded
+Linux security maintenance through versioned security layers or patch overlays
+for agreed user-space components.
+
+## License
+
 Original code and synthetic examples use the [Apache-2.0 license](LICENSE).
 Distributions retain the Go and YAML dependency licenses and attribution; see
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
