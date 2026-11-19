@@ -18,10 +18,10 @@ download the released dependency while network access is available:
 
 ```sh
 GOTOOLCHAIN=local GOPROXY=https://proxy.golang.org GOSUMDB=sum.golang.org \
-  go get github.com/firmdura/triageguard/pkg/triageguard@v1.0.0
+  go get github.com/firmdura/triageguard/pkg/triageguard@v1.0.1
 ```
 
-Browse the [v1.0.0 package documentation](https://pkg.go.dev/github.com/firmdura/triageguard@v1.0.0/pkg/triageguard).
+Browse the [v1.0.1 package documentation](https://pkg.go.dev/github.com/firmdura/triageguard@v1.0.1/pkg/triageguard).
 The repository's library smoke test works differently: it uses a local `replace`
 directive to test the code in your checkout offline. It does not download the
 released module.

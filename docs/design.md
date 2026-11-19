@@ -168,5 +168,5 @@ container workflow, a five-minute example, schemas, statuses, reason codes,
 exit codes, CI use, the Go API, size limits, report sensitivity, troubleshooting,
 and how to review a changed decision. Examples include the exact synthetic
 inputs and expected reports. Original code and examples use Apache-2.0, with
-third-party licenses and attribution preserved. The foundation selects a
-supported stable Go release and pins its toolchain and dependencies.
+third-party licenses and attribution preserved. Verification pins Go 1.27.4 and
+the versions in `go.mod`.

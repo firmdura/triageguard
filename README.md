@@ -14,7 +14,7 @@ and reports any changes or evidence it could not verify.
 
 You record each decision in a YAML manifest: the version or build reviewed
 (the **baseline**), the reasoning behind the decision, and the **assumptions**
-to check. TriageGuard v1.0.0 provides a Go command-line tool and library. Both
+to check. TriageGuard provides a Go command-line tool and library. Both
 read local files without modifying them or making network requests during a
 check.
 
@@ -64,7 +64,7 @@ go build -o bin/triageguard ./cmd/triageguard
 ```
 
 You can also download a prebuilt Linux binary from the
-[v1.0.0 release](https://github.com/firmdura/triageguard/releases/tag/v1.0.0).
+[v1.0.1 release](https://github.com/firmdura/triageguard/releases/tag/v1.0.1).
 The [installation guide](docs/distribution.md) explains how to choose an
 archive, verify its checksum, and install the executable.
 
@@ -114,11 +114,11 @@ package while network access is available:
 
 ```sh
 GOTOOLCHAIN=local GOPROXY=https://proxy.golang.org GOSUMDB=sum.golang.org \
-  go get github.com/firmdura/triageguard/pkg/triageguard@v1.0.0
+  go get github.com/firmdura/triageguard/pkg/triageguard@v1.0.1
 ```
 
 See the [API guide](docs/api.md), [runnable Go example](examples/go-check/main.go),
-and [versioned package documentation](https://pkg.go.dev/github.com/firmdura/triageguard@v1.0.0/pkg/triageguard).
+and [versioned package documentation](https://pkg.go.dev/github.com/firmdura/triageguard@v1.0.1/pkg/triageguard).
 
 ## Verify a source checkout
 
@@ -137,8 +137,7 @@ go build -o bin/triageguard ./cmd/triageguard
 [Release packaging](docs/distribution.md) builds versioned Linux/arm64 and
 Linux/amd64 binary archives, an archive of the tracked source, license notices,
 and SHA-256 checksums from a clean commit. Generated files in `bin/` and `dist/`
-are kept out of Git. Running the packaging script creates local files; it does
-not publish a release or change repository visibility.
+are kept out of Git.
 
 ## Further reading
 

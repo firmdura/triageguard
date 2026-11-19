@@ -85,7 +85,7 @@ Check both the report and diagnostics to distinguish the two cases.
 
 ## Public import and local distribution
 
-The repository and v1.0.0 module are public. Use the versioned `go get` command
+Use the versioned `go get` command
 in the [API guide](api.md) while network access is available. If an offline run
 cannot find the module, download it first, then return to the offline
 environment. Public module downloads do not require repository credentials.
@@ -97,5 +97,4 @@ It needs no credentials or network access once dependencies are prepared.
 Release packaging requires a clean, committed worktree and an empty or absent
 output directory. Verify and commit your changes before packaging, and use a
 fresh output directory for each rebuild. The [distribution guide](distribution.md)
-covers checksums, source archives, and license notices. The release scripts
-prepare local files; they do not publish them or change repository visibility.
+covers checksums, source archives, and license notices.

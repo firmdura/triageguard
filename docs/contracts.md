@@ -15,8 +15,8 @@ no customer data.
 
 ## Toolchain and package structure
 
-The project selected Go **1.27.4** from [go.dev/dl](https://go.dev/dl/) when the
-foundation was implemented on November 15, 2026. In `go.mod`,
+The project selected Go **1.27.4** from [go.dev/dl](https://go.dev/dl/) on
+November 15, 2026. In `go.mod`,
 `toolchain go1.27.4` names the preferred toolchain, and `go 1.27.0` sets the
 minimum Go version. Verification requires Go 1.27.4 on Linux and uses
 `GOTOOLCHAIN=local` to disable automatic toolchain downloads. The `toolchain`
@@ -267,7 +267,7 @@ least one unverifiable assumption. Setup, validation, and cancellation failures
 produce no report. SIGINT and SIGTERM cancel evaluation. A broken output pipe
 returns 2; discard any partial report after a write failure.
 
-## Foundation and integration verification
+## Manifest and integration tests
 
 The valid fixture and invalid-input fixtures are in
 [`testdata/contracts`](../testdata/contracts). Tests also check the exact 1 MiB
