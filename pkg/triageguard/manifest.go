@@ -92,10 +92,14 @@ func object(n *yaml.Node, allowed ...string) (map[string]*yaml.Node, error) {
 	for i := 0; i < len(n.Content); i += 2 {
 		key := n.Content[i]
 		if key.Kind != yaml.ScalarNode || key.Tag != "!!str" {
-			return nil, fmt.Errorf("mapping keys must be strings")
+			return nil, fmt.Errorf("line %d, column %d: mapping keys must be strings", key.Line, key.Column)
 		}
-		if _, ok := fields[key.Value]; ok {
-			return nil, fmt.Errorf("duplicate field %q", key.Value)
+		// Previous keys are distinct members of the small allowed field list.
+		for j := 0; j < i; j += 2 {
+			if first := n.Content[j]; first.Value == key.Value {
+				return nil, fmt.Errorf("line %d, column %d: duplicate field %q (first at line %d, column %d)",
+					key.Line, key.Column, key.Value, first.Line, first.Column)
+			}
 		}
 		known := false
 		for _, name := range allowed {
@@ -105,7 +109,7 @@ func object(n *yaml.Node, allowed ...string) (map[string]*yaml.Node, error) {
 			}
 		}
 		if !known {
-			return nil, fmt.Errorf("unknown field %q", key.Value)
+			return nil, fmt.Errorf("line %d, column %d: unknown field %q", key.Line, key.Column, key.Value)
 		}
 		fields[key.Value] = n.Content[i+1]
 	}

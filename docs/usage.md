@@ -74,6 +74,9 @@ evidence paths beneath it.
 
 The report goes to standard output. Diagnostic messages go to standard error.
 Manifest-loading errors include the quoted manifest path and the underlying cause.
+If a YAML field name is unknown, repeated, or not a string, the diagnostic gives
+the key's line and column, starting at 1. For a repeated field, it also points
+to the first occurrence.
 An invalid manifest, failure to set up the evidence root, or cancellation
 produces no report. If an individual evidence file is unavailable, the CLI
 produces a complete report with exit code 2 and no diagnostic message. A failed

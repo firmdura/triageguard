@@ -80,6 +80,25 @@ func TestManifestRejections(t *testing.T) {
 	}
 }
 
+func TestManifestFieldLocations(t *testing.T) {
+	for _, tt := range []struct{ fixture, want string }{
+		{"unknown-assumption", `decision 1: assumption 1: line 14, column 9: unknown field "unknown"`},
+		{"duplicate-decision-field", `decision 1: line 4, column 5: duplicate field "id" (first at line 3, column 5)`},
+		{"complex-key", `manifest: line 14, column 3: mapping keys must be strings`},
+	} {
+		t.Run(tt.fixture, func(t *testing.T) {
+			data, err := os.ReadFile("../../testdata/contracts/reject/" + tt.fixture + ".yaml")
+			if err != nil {
+				t.Fatal(err)
+			}
+			_, err = triageguard.LoadManifest(strings.NewReader(string(data)))
+			if err == nil || !strings.Contains(err.Error(), tt.want) {
+				t.Fatalf("want %q in manifest error, got %v", tt.want, err)
+			}
+		})
+	}
+}
+
 func TestManifestSequenceTags(t *testing.T) {
 	read := func(name string) []byte {
 		t.Helper()
