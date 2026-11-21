@@ -76,7 +76,10 @@ decision has exactly these fields: `id`, `cve`, `baseline`, `rationale`, and
 character other than whitespace. The CVE must match
 `^CVE-[0-9]{4}-[0-9]{4,}$`. Every decision must have at least one assumption.
 Decision IDs must be unique, and assumption IDs must be unique across the
-entire manifest.
+entire manifest. A duplicate-ID error identifies both entries. For decision
+IDs it gives their positions in the manifest; for assumption IDs it gives
+each decision's ID and the position within that decision's assumption list.
+Positions start at 1.
 
 Every assumption needs a nonblank `id`, a supported `kind`, and a nonempty
 string `path`. Its remaining fields depend on what it checks:

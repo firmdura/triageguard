@@ -5,6 +5,11 @@ decisions:
     baseline: release-1
     rationale: Synthetic decision; no applicability claim.
     assumptions:
+      - id: optional-label
+        kind: config
+        path: config.json
+        key: LABEL
+        expected_present: false
       - id: config-present
         kind: config
         path: config.json

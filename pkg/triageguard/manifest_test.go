@@ -80,11 +80,14 @@ func TestManifestRejections(t *testing.T) {
 	}
 }
 
-func TestManifestFieldLocations(t *testing.T) {
+func TestManifestErrorLocations(t *testing.T) {
 	for _, tt := range []struct{ fixture, want string }{
 		{"unknown-assumption", `decision 1: assumption 1: line 14, column 9: unknown field "unknown"`},
 		{"duplicate-decision-field", `decision 1: line 4, column 5: duplicate field "id" (first at line 3, column 5)`},
 		{"complex-key", `manifest: line 14, column 3: mapping keys must be strings`},
+		{"duplicate-decision-id", `duplicate decision id "example" at decision 2 (first at decision 1)`},
+		{"duplicate-assumption-id", `duplicate assumption id "config-present" at decision "example", assumption 2 (first at decision "example", assumption 1)`},
+		{"duplicate-assumption-id-across-decisions", `duplicate assumption id "config-present" at decision "second-decision", assumption 1 (first at decision "example", assumption 2)`},
 	} {
 		t.Run(tt.fixture, func(t *testing.T) {
 			data, err := os.ReadFile("../../testdata/contracts/reject/" + tt.fixture + ".yaml")

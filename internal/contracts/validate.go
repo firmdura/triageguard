@@ -16,16 +16,20 @@ func ValidateManifest(m Manifest) error {
 	if len(m.Decisions) == 0 {
 		return fmt.Errorf("decisions must not be empty")
 	}
-	decisionIDs := make(map[string]bool)
-	assumptionIDs := make(map[string]bool)
-	for _, d := range m.Decisions {
+	type assumptionLocation struct {
+		decision string
+		number   int
+	}
+	decisionIDs := make(map[string]int)
+	assumptionIDs := make(map[string]assumptionLocation)
+	for di, d := range m.Decisions {
 		if strings.TrimSpace(d.ID) == "" {
 			return fmt.Errorf("decision id must not be empty")
 		}
-		if decisionIDs[d.ID] {
-			return fmt.Errorf("duplicate decision id %q", d.ID)
+		if first, ok := decisionIDs[d.ID]; ok {
+			return fmt.Errorf("duplicate decision id %q at decision %d (first at decision %d)", d.ID, di+1, first)
 		}
-		decisionIDs[d.ID] = true
+		decisionIDs[d.ID] = di + 1
 		if !cvePattern.MatchString(d.CVE) {
 			return fmt.Errorf("decision %q: invalid CVE", d.ID)
 		}
@@ -35,14 +39,15 @@ func ValidateManifest(m Manifest) error {
 		if len(d.Assumptions) == 0 {
 			return fmt.Errorf("decision %q: assumptions must not be empty", d.ID)
 		}
-		for _, a := range d.Assumptions {
+		for ai, a := range d.Assumptions {
 			if strings.TrimSpace(a.ID) == "" {
 				return fmt.Errorf("decision %q: assumption id must not be empty", d.ID)
 			}
-			if assumptionIDs[a.ID] {
-				return fmt.Errorf("duplicate assumption id %q", a.ID)
+			if first, ok := assumptionIDs[a.ID]; ok {
+				return fmt.Errorf("duplicate assumption id %q at decision %q, assumption %d (first at decision %q, assumption %d)",
+					a.ID, d.ID, ai+1, first.decision, first.number)
 			}
-			assumptionIDs[a.ID] = true
+			assumptionIDs[a.ID] = assumptionLocation{decision: d.ID, number: ai + 1}
 			if a.Path == "" {
 				return fmt.Errorf("assumption %q: path must not be empty", a.ID)
 			}
