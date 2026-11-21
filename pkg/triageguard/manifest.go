@@ -48,7 +48,7 @@ func LoadManifest(r io.Reader) (Manifest, error) {
 	}
 	version := root["schema_version"]
 	if version == nil || version.Kind != yaml.ScalarNode || version.Tag != "!!int" {
-		return Manifest{}, fmt.Errorf("schema_version must be an integer")
+		return Manifest{}, fieldTypeError(version, "schema_version", "an integer")
 	}
 	var m Manifest
 	if err := version.Decode(&m.SchemaVersion); err != nil {
@@ -56,7 +56,7 @@ func LoadManifest(r io.Reader) (Manifest, error) {
 	}
 	decisions := root["decisions"]
 	if decisions == nil || decisions.Kind != yaml.SequenceNode || decisions.Tag != "!!seq" {
-		return Manifest{}, fmt.Errorf("decisions must be a sequence")
+		return Manifest{}, fieldTypeError(decisions, "decisions", "a sequence")
 	}
 	for i, node := range decisions.Content {
 		d, err := decodeDecision(node)
@@ -116,10 +116,17 @@ func object(n *yaml.Node, allowed ...string) (map[string]*yaml.Node, error) {
 	return fields, nil
 }
 
+func fieldTypeError(n *yaml.Node, name, want string) error {
+	if n == nil {
+		return fmt.Errorf("missing required field %q (expected %s)", name, want)
+	}
+	return fmt.Errorf("line %d, column %d: %s must be %s", n.Line, n.Column, name, want)
+}
+
 func stringField(fields map[string]*yaml.Node, name string) (string, error) {
 	n := fields[name]
 	if n == nil || n.Kind != yaml.ScalarNode || n.Tag != "!!str" {
-		return "", fmt.Errorf("%s must be an explicitly supplied string", name)
+		return "", fieldTypeError(n, name, "a string")
 	}
 	return n.Value, nil
 }
@@ -141,7 +148,7 @@ func decodeDecision(n *yaml.Node) (Decision, error) {
 	}
 	assumptions := fields["assumptions"]
 	if assumptions == nil || assumptions.Kind != yaml.SequenceNode || assumptions.Tag != "!!seq" {
-		return Decision{}, fmt.Errorf("assumptions must be a sequence")
+		return Decision{}, fieldTypeError(assumptions, "assumptions", "a sequence")
 	}
 	for i, node := range assumptions.Content {
 		a, err := decodeAssumption(node)
@@ -193,7 +200,7 @@ func decodeAssumption(n *yaml.Node) (Assumption, error) {
 	}
 	presentNode := fields["expected_present"]
 	if presentNode == nil || presentNode.Kind != yaml.ScalarNode || presentNode.Tag != "!!bool" {
-		return Assumption{}, fmt.Errorf("expected_present must be an explicitly supplied boolean")
+		return Assumption{}, fieldTypeError(presentNode, "expected_present", "a boolean")
 	}
 	var present bool
 	if err := presentNode.Decode(&present); err != nil {

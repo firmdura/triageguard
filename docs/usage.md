@@ -77,6 +77,12 @@ Manifest-loading errors include the quoted manifest path and the underlying caus
 If a YAML field name is unknown, repeated, or not a string, the diagnostic gives
 the key's line and column, starting at 1. For a repeated field, it also points
 to the first occurrence.
+
+If a required field is missing, the diagnostic names it. If the field is
+present but has the wrong YAML type, the diagnostic points to its value. For
+example, if `expected_value: 1` was meant to record a string, write
+`expected_value: '1'` instead.
+
 An invalid manifest, failure to set up the evidence root, or cancellation
 produces no report. If an individual evidence file is unavailable, the CLI
 produces a complete report with exit code 2 and no diagnostic message. A failed
