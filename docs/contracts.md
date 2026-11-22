@@ -231,8 +231,9 @@ dumps, and raw operating-system diagnostics. The writers sort copies of the
 results, preserve the supplied fields and statuses, escape Markdown text, and
 return output errors. Markdown adds plain-English explanations beside the exact
 reason codes. Supplied strings use JSON quoting, with ordinary single spaces
-left readable and leading, trailing, or repeated spaces shown as `\u0020`.
-They do not collect or evaluate evidence.
+left readable and leading, trailing, or repeated ASCII spaces shown as `\u0020`.
+Markdown also escapes non-ASCII whitespace. Neither writer collects or evaluates
+evidence.
 
 ## Public check and command
 

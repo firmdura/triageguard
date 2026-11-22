@@ -254,6 +254,9 @@ func TestWriteMarkdownWhitespaceDisplay(t *testing.T) {
 		wantObserved       string
 	}{
 		{"ordinary-sentence", "A human decision.", "Another decision.", `A human decision.`, `Another decision.`},
+		{"nonbreaking-space", "release candidate", "release\u00a0candidate", `release candidate`, `release\u00a0candidate`},
+		{"narrow-space-and-literal", "café\u202f42", `café\u202f42`, `café\u202f42`, `café\\u202f42`},
+		{"ideographic-space", "日本語\u3000", "日本語 ", `日本語\u3000`, `日本語\u0020`},
 		{"quoted-words", `A "human" decision`, `A "reviewed" decision`, `A \"human\" decision`, `A \"reviewed\" decision`},
 		{"repeated", "a  b", "a b", `a\u0020\u0020b`, `a b`},
 		{"leading", " a", "a", `\u0020a`, `a`},

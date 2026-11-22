@@ -63,10 +63,10 @@ already in the report; they do not read evidence or recalculate the result.
 `WriteJSON` writes indented JSON followed by a newline. `WriteMarkdown` explains
 the status and reason codes in plain English and displays exact evidence in
 quoted JSON form. Ordinary single spaces remain readable; leading, trailing,
-and repeated spaces use visible `\u0020` escapes so significant whitespace and
-empty strings stay distinct. Both functions return
-output errors, including short writes. If writing fails, discard any partial
-output.
+and repeated ASCII spaces use visible `\u0020` escapes. Non-ASCII whitespace
+is escaped too (for example, `\u00a0` for a nonbreaking space). Both functions
+return output errors, including short writes. If writing fails, discard any
+partial output.
 
 The library does not call `os.Exit`, modify inputs, run builds or scanners, or
 make network requests. Your application decides how to exit. The CLI uses

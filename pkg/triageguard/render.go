@@ -7,6 +7,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"unicode"
 )
 
 // WriteJSON writes a deterministic, indented JSON report followed by a newline.
@@ -25,7 +26,8 @@ func WriteJSON(w io.Writer, report Report) error {
 // decisions and assumptions by ID. Strings are displayed as escaped JSON
 // literals so empty strings, whitespace, and absent optional fields remain
 // distinct and supplied text cannot create Markdown structure. Ordinary spaces
-// remain readable; leading, trailing, and repeated spaces are visibly escaped.
+// remain readable; leading, trailing, and repeated spaces and non-ASCII
+// whitespace are visibly escaped.
 // Expected and observed evidence retain their JSON field names. The writer does
 // not collect evidence or recompute verdicts or counts. Writer errors are returned
 // to the caller.
@@ -147,6 +149,10 @@ func markdownJSON(value any) string {
 		// can disappear, while ordinary sentences remain readable.
 		if r == ' ' && (i == stringStart || data[i-1] == ' ' || data[i+1] == ' ' || data[i+1] == '"') {
 			escaped.WriteString("&#92;u0020")
+			continue
+		}
+		if r > unicode.MaxASCII && unicode.IsSpace(r) {
+			fmt.Fprintf(&escaped, "&#92;u%04x", r)
 			continue
 		}
 		// Character references are parsed as text rather than Markdown syntax.

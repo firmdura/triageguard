@@ -230,8 +230,9 @@ environment dumps, and raw operating system diagnostics. Optional fields
 preserve the difference between a missing value and an empty string. Markdown
 explains result codes in plain English and uses JSON quoting to preserve exact
 evidence. Ordinary single spaces remain readable; leading, trailing, and repeated
-spaces appear as `\u0020`, making significant whitespace and empty strings
-visible. See the
+ASCII spaces appear as `\u0020`. Non-ASCII whitespace is also shown as a JSON
+escape: `release\u00a0candidate` contains a nonbreaking space, not the ordinary
+space in `release candidate`. See the
 [expected reports](../testdata/demo/expected) for examples.
 
 ## Limits and handling reports
