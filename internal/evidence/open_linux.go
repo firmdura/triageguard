@@ -26,13 +26,13 @@ func New(root string) (*Collector, error) {
 	// A trailing slash makes Linux resolve a symlink before O_NOFOLLOW can
 	// reject it. Remove only trailing slashes, preserving the filesystem root
 	// and the meaning of trusted parent components such as symlinks or "..".
-	root = strings.TrimRight(root, "/")
-	if root == "" {
-		root = "/"
+	path := strings.TrimRight(root, "/")
+	if path == "" {
+		path = "/"
 	}
-	fd, err := syscall.Open(root, syscall.O_RDONLY|syscall.O_DIRECTORY|syscall.O_NOFOLLOW|syscall.O_CLOEXEC, 0)
+	fd, err := syscall.Open(path, syscall.O_RDONLY|syscall.O_DIRECTORY|syscall.O_NOFOLLOW|syscall.O_CLOEXEC, 0)
 	if err != nil {
-		return nil, fmt.Errorf("open evidence root: %w", err)
+		return nil, fmt.Errorf("open evidence root %q: %w", root, err)
 	}
 	return &Collector{root: os.NewFile(uintptr(fd), "evidence-root")}, nil
 }

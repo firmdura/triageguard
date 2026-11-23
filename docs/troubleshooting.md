@@ -46,6 +46,12 @@ symbolic link as the final component is rejected. The CLI needs read access to
 its inputs, not write access. Cancellation through SIGINT or SIGTERM also
 returns 2 without a report.
 
+For example, `open evidence root "exports/build-42": no such file or directory`
+names the `--root` directory the CLI could not open. Check the directory name
+and, for a relative path, the working directory. If the root opens but a
+declared file is missing, the CLI writes a report with `evidence-missing`
+instead.
+
 ## Exit 2 with a complete report
 
 An `unverifiable` observation means that TriageGuard could not read or trust the

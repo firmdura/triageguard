@@ -229,6 +229,16 @@ func TestCLI(t *testing.T) {
 		}
 	})
 
+	t.Run("root-open-errors", func(t *testing.T) {
+		manifest, root := cliInputs(t, repository)
+		for _, path := range []string{filepath.Join(root, `missing "snapshot"`) + "//", filepath.Join(root, "source.c")} {
+			got := runBinary(t, binary, "check", "--manifest", manifest, "--root", path)
+			if got.code != 2 || len(got.stdout) != 0 || !strings.Contains(string(got.stderr), fmt.Sprintf("open evidence root %q:", path)) {
+				t.Fatalf("want diagnostic-only exit 2 naming %q, got code=%d stdout=%s stderr=%s", path, got.code, got.stdout, got.stderr)
+			}
+		}
+	})
+
 	t.Run("help-version-and-strict-errors", func(t *testing.T) {
 		manifest, root := cliInputs(t, repository)
 		valid := []string{"check", "--manifest", manifest, "--root", root}
@@ -251,8 +261,6 @@ func TestCLI(t *testing.T) {
 			append(append([]string(nil), valid...), "--root", root),
 			{"check", "--manifest=" + manifest, "--root=" + root, "--format", "json", "--format", "json"},
 			{"check", "--manifest", filepath.Join(root, "missing"), "--root", root},
-			{"check", "--manifest", manifest, "--root", filepath.Join(root, "missing")},
-			{"check", "--manifest", manifest, "--root", filepath.Join(root, "source.c")},
 			{"check", "--manifest", root, "--root", root},
 		} {
 			got := runBinary(t, binary, args...)

@@ -158,7 +158,7 @@ func TestCheckValidationRootAndCancellation(t *testing.T) {
 	invalid.Decisions[0].Assumptions[0].Expectation = (*triageguard.ConfigPresent)(nil)
 	assertError("typed-nil-expectation", context.Background(), invalid, root, nil)
 	assertError("empty-root", context.Background(), m, "", nil)
-	assertError("missing-root", context.Background(), m, filepath.Join(root, "missing"), nil)
+	assertError("missing-root", context.Background(), m, filepath.Join(root, "missing"), os.ErrNotExist)
 	assertError("file-root", context.Background(), m, filepath.Join(root, "config.json"), nil)
 	link := filepath.Join(t.TempDir(), "root-link")
 	if err := os.Symlink(root, link); err != nil {
