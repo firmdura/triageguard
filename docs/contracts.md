@@ -261,7 +261,7 @@ be a regular file; named pipes and devices are rejected without a blocking
 read. `--help` (or `-h`) works alone at the top level or after `check`.
 `--version` works alone at the top level. Help and version commands exit 0 when
 writing their output succeeds. Development builds show `triageguard dev`;
-release builds set the version with `-ldflags '-X main.version=v1.0.0'`.
+release builds set `main.version` at link time and show the release tag instead of `dev`.
 
 For `check`, standard output (stdout) contains only the chosen report;
 diagnostic messages go to standard error (stderr). Exit 0 means every assumption

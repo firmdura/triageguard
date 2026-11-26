@@ -64,7 +64,7 @@ go build -o bin/triageguard ./cmd/triageguard
 ```
 
 You can also download a prebuilt Linux binary from the
-[v1.0.1 release](https://github.com/firmdura/triageguard/releases/tag/v1.0.1).
+[latest release](https://github.com/firmdura/triageguard/releases/latest).
 The [installation guide](docs/distribution.md) explains how to choose an
 archive, verify its checksum, and install the executable.
 
@@ -114,11 +114,11 @@ package while network access is available:
 
 ```sh
 GOTOOLCHAIN=local GOPROXY=https://proxy.golang.org GOSUMDB=sum.golang.org \
-  go get github.com/firmdura/triageguard/pkg/triageguard@v1.0.1
+  go get github.com/firmdura/triageguard/pkg/triageguard@v1.0.6
 ```
 
 See the [API guide](docs/api.md), [runnable Go example](examples/go-check/main.go),
-and [versioned package documentation](https://pkg.go.dev/github.com/firmdura/triageguard@v1.0.1/pkg/triageguard).
+and [versioned package documentation](https://pkg.go.dev/github.com/firmdura/triageguard@v1.0.6/pkg/triageguard).
 
 ## Verify a source checkout
 
